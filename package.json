@@ -1,0 +1,30 @@
+{
+  "name": "language-web-server",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "keywords": [
+    "idiomas",
+    "educación",
+    "academia-online",
+    "Vue.js",
+    "Node.js",
+    "pagos",
+    "newsletter"
+  ],
+  "author": "Ramirez Alejandro Fabian",
+  "license": "ISC",
+  "description": "Plataforma de academia online de idiomas con cursos, pagos integrados y newsletter.",
+  "dependencies": {
+    "colors": "^1.4.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.7"
+  }
+}
