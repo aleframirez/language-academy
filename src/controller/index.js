@@ -1,7 +1,16 @@
 // Archivo barril de Controlers
 
 // Users
-const { getUsers, postUsers, updateUsers, deleteUsers } = require("./user.js");
+const {
+  getUsers,
+  postUsers,
+  updateUsers,
+  deleteUsers,
+  postRole,
+} = require("./user.js");
+
+// Auth
+const { login, googleSignIn } = require("./auth.js");
 
 module.exports = {
   // Users
@@ -9,4 +18,9 @@ module.exports = {
   postUsers,
   updateUsers,
   deleteUsers,
+  postRole,
+
+  // Auth
+  login,
+  googleSignIn,
 };

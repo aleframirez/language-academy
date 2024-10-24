@@ -1,7 +1,7 @@
 const { request, response } = require("express");
 const bcrypt = require("bcrypt");
 const colors = require("colors");
-const { User } = require("../models");
+const { User, Role } = require("../models");
 
 // GET Users
 const getUsers = async (req = request, res = response) => {
@@ -31,7 +31,7 @@ const postUsers = async (req = request, res = response) => {
   const salt = bcrypt.genSaltSync();
   user.password = bcrypt.hashSync(password, salt);
 
-  user.username = `@${username}`;
+  // user.username = `@${username}`;
 
   // Save in the DB
   await user.save();
@@ -42,6 +42,7 @@ const postUsers = async (req = request, res = response) => {
   });
 };
 
+// PUT User
 const updateUsers = async (req = request, res = response) => {
   const { id } = req.params;
   const { _id, password, username, google, email, ...remainder } = req.body;
@@ -51,7 +52,7 @@ const updateUsers = async (req = request, res = response) => {
 
   if (password) {
     // We check that it meets the requirements
-    if (!regex.test(test)) {
+    if (!regex.test(password)) {
       return res.status(204).json({ error: "Invalid Password" });
     }
 
@@ -69,6 +70,7 @@ const updateUsers = async (req = request, res = response) => {
   });
 };
 
+// DELETE User
 const deleteUsers = async (req = request, res = response) => {
   const { id } = req.params;
 
@@ -85,9 +87,26 @@ const deleteUsers = async (req = request, res = response) => {
   });
 };
 
+// POST Role
+const postRole = async (req = request, res = response) => {
+  // Get the data we want to use
+  const { role } = req.body;
+
+  // Create new User
+  const roleName = new Role({ role });
+
+  await roleName.save();
+
+  res.status(201).json({
+    msg: "POST /api/users - Controller",
+    roleName,
+  });
+};
+
 module.exports = {
   getUsers,
   postUsers,
   updateUsers,
   deleteUsers,
+  postRole,
 };
